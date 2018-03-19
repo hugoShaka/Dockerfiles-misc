@@ -19,6 +19,4 @@ RUN cd opt \
  && wget -O /opt/firefox.tar.bz2 "https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=en-US" \
  && tar -jxvf firefox.tar.bz2
 
-ENV LANG C
-
 ENTRYPOINT [ "/opt/firefox/firefox" ]

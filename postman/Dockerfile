@@ -19,6 +19,6 @@ RUN apt-get update \
                     --no-install-recommends -y \
  && curl -L "https://dl.pstmn.io/download/latest/linux64" -o postman.tar.gz \
  && tar xzf postman.tar.gz \
- && ls
+ && rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT [ "/Postman/Postman" ]
