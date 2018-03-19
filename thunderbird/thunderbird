@@ -1,0 +1,11 @@
+#!/bin/bash
+
+docker rm thunderbird
+
+docker run -d \
+  -v "${HOME}/.thunderbird:/home/thunderbird/.thunderbird" \
+  -v /etc/localtime:/etc/localtime:ro \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  -e DISPLAY=unix$DISPLAY \
+  --name thunderbird \
+  thunderbird

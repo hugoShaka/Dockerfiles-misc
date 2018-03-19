@@ -1,0 +1,11 @@
+#!/bin/bash
+
+docker rm pidgin
+
+docker run -d \
+  -v /etc/localtime:/etc/localtime:ro \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  -v "${HOME}/.purple:/home/pidgin/.purple" \
+  -e DISPLAY=unix$DISPLAY \
+  --name pidgin \
+  pidgin

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+docker rm quasselclient
+
+docker run -d \
+  -v /etc/localtime:/etc/localtime:ro \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  -v "${HOME}/.config/quassel-irc.org:/home/quassel-client/.config/quassel-irc.org" \
+  -e DISPLAY=unix$DISPLAY \
+  --name quasselclient \
+  quasselclient

@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -e
+
+first_start() {
+    docker run -d \
+        --net host \
+        --shm-size 2g \
+        --cpuset-cpus 0 \
+        -v /etc/localtime:/etc/localtime:ro \
+        -v /tmp/.X11-unix:/tmp/.X11-unix \
+        -v "${HOME}/.firefoxx/cache:/root/.cache/mozilla" \
+        -v "${HOME}/.firefoxx/mozilla:/root/.mozilla" \
+        -v "${HOME}/Downloads:/root/Downloads" \
+        -v "${HOME}/Pictures:/root/Pictures" \
+        -v "${HOME}/Torrents:/root/Torrents" \
+        -v "/etc/machine-id:/etc/machine-id" \
+        -e "DISPLAY=unix${DISPLAY}" \
+        -e GDK_SCALE \
+        -e GDK_DPI_SCALE \
+        --device /dev/snd \
+        --device /dev/dri \
+        --name firefox-quantum \
+        firefox-quantum
+}
+
+new_window() {
+    docker exec firefox-quantum /opt/firefox/firefox
+}
+
+if docker ps | grep -q "Up.*firefox-quantum"; then
+    new_window
+else
+    if docker ps -a | grep -q "\(Exited\|Created\).*firefox-quantum"; then
+        docker rm firefox-quantum
+    fi
+    first_start
+fi
+
+exit 0

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+docker rm pass 2&> /dev/null
+
+docker run -it \
+  -v /etc/localtime:/etc/localtime:ro \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  -v "${HOME}/.pass:/root" \
+  -e DISPLAY=unix$DISPLAY \
+  --name pass \
+  pass "$@"
