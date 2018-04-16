@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NAME=`echo $PWD | sed 's!/!_!gi'`
+NAME=`echo lnav_$PWD | sed 's!/!_!gi'`
 
 docker rm $NAME
 
@@ -8,7 +8,7 @@ docker run -it \
   -v /etc/localtime:/etc/localtime:ro \
   -v "${PWD}:/logs" \
   -e TERM=xterm-256color \
-  --name lnav_${NAME} \
+  --name ${NAME} \
   lnav
 
-#docker rm lnav_${NAME}
+docker rm ${NAME}
