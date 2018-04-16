@@ -1,0 +1,9 @@
+#!/bin/bash
+
+docker rm sieve-connect
+
+docker run -it \
+  -v "${HOME}/.sieve:/sieve" \
+  --name sieve-connect \
+  sieve-connect "$@"
+

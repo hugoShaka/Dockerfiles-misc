@@ -1,0 +1,16 @@
+#!/bin/bash
+# examples :
+#   ./graph.py | dot -Tpng -oawesomegraph.png
+#   dot -Tpng graph.dot -ograph.png
+
+NAME=`echo dot_$PWD | sed 's!/!_!gi'`
+
+docker rm ${NAME}
+
+docker run -i \
+  -v /etc/localtime:/etc/localtime:ro \
+  -v "${PWD}:/graph" \
+  --name ${NAME} \
+  graphviz-dot "$@"
+
+docker rm ${NAME}
