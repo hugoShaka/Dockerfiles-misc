@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
         tar \
         wget \
         bzip2 \
+        fonts-dejavu-extra \
         --no-install-recommends \
  && rm -rf /var/lib/apt/lists/*
 
